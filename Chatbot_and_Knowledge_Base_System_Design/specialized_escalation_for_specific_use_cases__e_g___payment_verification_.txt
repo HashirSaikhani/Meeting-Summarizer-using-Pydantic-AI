@@ -1,0 +1,4 @@
+Feature: Specialized escalation for specific use cases (e.g., payment verification)
+====================================================================================
+
+For specialized cases like payment verification, if a user sends an image of a receipt, the chatbot cannot verify it and must escalate the query to a human accountant. The accountant would then check the payment system and respond with a confirmation, such as "Payment received, your account has been updated." A dashboard should also be maintained to track these escalations, showing open cases, who is handling them, and reporting metrics like total escalations per day and average response time.

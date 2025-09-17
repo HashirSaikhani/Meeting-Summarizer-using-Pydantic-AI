@@ -1,4 +1,0 @@
-Meeting: App meeting
-====================
-
-The meeting discussed the development of a knowledge base pipeline for a chatbot.  Key features include handling various data formats (structured and unstructured), updating dynamic facts via an admin dashboard, WhatsApp integration (live listening and data imports), and a system for escalating unanswered queries to human agents.  The project will prioritize structured data ingestion initially, with unstructured data support added later.  A pending Meta verification issue was also noted.

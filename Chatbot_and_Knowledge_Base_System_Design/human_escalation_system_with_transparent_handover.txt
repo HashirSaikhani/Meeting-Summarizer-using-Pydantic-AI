@@ -1,0 +1,6 @@
+Feature: Human escalation system with transparent handover
+===========================================================
+
+The human escalation system is designed to provide a transparent handover to a human agent when the chatbot cannot answer a query. The end-user will not realize they have switched from bot to human, as the human agent will reply using the same WhatsApp interface. There are two proposed methods for human replies: either the human uses WhatsApp Business manually with real-time conversation syncing, or, preferably, the human uses an admin dashboard to view escalated queries and reply directly through it, with responses sent via the WhatsApp API.
+
+Special cases, such as payment verification via receipt images, will also trigger an escalation to a human accountant. A dedicated dashboard will be maintained to track escalations, displaying open cases, assigned handlers, and reporting metrics such as daily escalations and average response times. This system will be managed through a dashboard as part of the overall flow.

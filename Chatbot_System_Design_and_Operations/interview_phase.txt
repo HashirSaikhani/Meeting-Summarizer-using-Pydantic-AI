@@ -1,0 +1,4 @@
+Feature: Interview phase
+=========================
+
+The 'interview phase' is a current and active phase. There are issues with number verification, specifically for numbers sourced from a particular city. These numbers are currently showing a 'pending' status via API and on Meta, which prevents their use. Meta's official support suggests that case or solution providers can request registration for these numbers, as indicated by an 'error attack interview' status.

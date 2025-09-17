@@ -1,0 +1,4 @@
+Feature: Future support for image data
+=======================================
+
+Initially, the system will focus on text data, meeting transcripts, and audio converted to text. Support for images is planned for later phases. In cases where a user sends an image, such as a receipt for payment verification, the chatbot currently cannot process it and must escalate to a human agent.

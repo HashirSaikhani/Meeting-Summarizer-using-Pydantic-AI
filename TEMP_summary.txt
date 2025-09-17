@@ -1,4 +1,0 @@
-Meeting: TEMP
-=============
-
-The meeting focused on the TEMP app's development.  Key points included: a pending Meta verification issue delaying app launch; a phased development plan starting with structured data ingestion (FAQs) and an admin dashboard for dynamic data updates;  support for various data formats (Word, PDF, chat logs, etc.) with unstructured data support added later; WhatsApp integration via live listening (limited to six months of data) and historical data import; and a human escalation system with a dashboard for tracking and managing open cases.

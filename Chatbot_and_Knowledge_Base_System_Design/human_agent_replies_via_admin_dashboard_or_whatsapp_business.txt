@@ -1,0 +1,4 @@
+Feature: Human agent replies via admin dashboard or WhatsApp Business
+======================================================================
+
+When the chatbot cannot answer a query, it should escalate to a human agent. The human agent can reply using the same WhatsApp interface, making the switch from bot to human seamless for the end-user. Two methods are proposed for human replies: either the human manually uses WhatsApp Business, with the system syncing conversations in real-time, or, preferably, the human uses the admin dashboard to view escalated queries and reply directly through it, with the backend sending responses via the WhatsApp API. For special cases like payment verification, escalation to a human accountant is needed to check payment systems and reply. A dashboard should also be maintained to track escalations, showing open cases, assigned handlers, and metrics such as total escalations per day and average response time.

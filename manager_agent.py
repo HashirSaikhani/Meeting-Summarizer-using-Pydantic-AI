@@ -9,69 +9,84 @@ from pydantic_ai.providers.google import GoogleProvider
 # Import sub-agents
 from database_agent import agent as database_agent
 from summary_agent import summary_agent
+from feature_agent import feature_agent
 
 load_dotenv()
 
 # --------- Agent + Provider Setup ---------
 provider = GoogleProvider(api_key=os.getenv("GOOGLE_API_KEY"))
-model = GoogleModel("gemini-1.5-flash", provider=provider)
+model = GoogleModel("gemini-2.5-flash", provider=provider)
 
-# --- Manager Agent ---
 manager_agent = Agent(
     model=model,
     system_prompt=(
-        "You are the Manager Agent for the Transcript System.\n"
-        "You help users manage their meeting transcripts by either saving new transcripts or generating summaries of existing ones.\n\n"
-        "Your two main capabilities are:\n"
-        "1. Saving a meeting transcript when the user provides a meeting name and a transcript file path.\n"
-        "   - After saving, you also generate a summary for that meeting.\n"
-        "2. Summarizing an existing meeting transcript when the user only asks for a summary.\n\n"
-        "Guidelines:\n"
-        "- If the user wants to save a meeting, ask for the meeting name and file path if they are missing.\n"
-        "- If the user only wants a summary, ask for the meeting name if it’s missing.\n"
-        "- Keep responses concise, guiding the user clearly to provide the necessary details.\n"
-        "- Do not invent meeting names, file paths, or transcript content.\n"
+        "You are the Manager Agent for the Meeting System.\n\n"
+        "Your workflow is strictly sequential:\n"
+        "1. Always save the meeting first.\n"
+        "2. After saving, generate meeting summary.\n"
+        "3. After the summary, extract ONLY the meeting features.\n\n"
+        "Rules:\n"
+        "- Do not skip or change the order: Save → Summarize → Extract Features.\n"
+        "- Confirm with the user before performing saving.\n"
+        "- Keep responses short and clear."
     ),
 )
 
 
+
 # --- Manager Tools ---
 @manager_agent.tool
-async def save_meeting(ctx: RunContext[None], meeting_name: str, file_path: str) -> str:
-    """Save transcript via database_agent"""
+async def save_or_update_meeting(ctx: RunContext[None], file_path: str) -> str:
+    """Save or update meeting via database_agent"""
     
-    print("\n------- Save Meeting Tool -------\n")
+    print("\n------- Manager Save_or_update_meeting Tool -------\n")
     
-    print(f"[DEBUG] Manager: Saving transcript for {meeting_name} from {file_path}")
+    print(f"\n[DEBUG] Manager: Saving meeting from {file_path}\n")
 
-    # Step 1 - Save transcript using Database Agent
+    # Step 1 - Save meeting using Database Agent
     db_result = await database_agent.run(
-        f'Save the transcript from "{file_path}" with the meeting name "{meeting_name}"'
+        f'Save the meeting from "{file_path}"'
     )
-    print(f"\n[DEBUG] Database Agent Output: {db_result.output}")
+    print(f"\n[DEBUG] Database Agent Output: {db_result.output}\n")
 
     return (
-        f"Transcript saved.\n"
+        f"meeting saved.\n"
         f"Database Response: {db_result.output}\n"
     )
     
 # --- Manager Tools ---
 @manager_agent.tool
-async def summarize_meeting(ctx: RunContext[None], meeting_name: str) -> str:
-    """Summarize the Transcript via summary_agent"""
+async def summarize_meeting(ctx: RunContext[None], meeting_name: str, file_path) -> str:
+    """Summarize the meeting via summary_agent"""
     
-    print("\n------- Summarize meeting Tool -------\n")
+    print("\n------- Manager Summarize meeting Tool -------\n")
 
     # Step 1 - Generate summary using Summary Agent
-    print(f"\n[DEBUG] Manager: Summarizing meeting {meeting_name}")
+    print(f"\n[DEBUG] Manager: Summarizing meeting {meeting_name} from file path: {file_path}\n")
     summary_result = await summary_agent.run(
-        f"Summarize the meeting: {meeting_name}"
+        f"Summarize the meeting: {meeting_name} from file path: {file_path}"
     )
-    print(f"\n[DEBUG] Summary Agent Output: {summary_result.output}")
+    print(f"\n[DEBUG] Summary Agent Output: {summary_result.output}\n")
 
     return (
         f"Summary: {summary_result.output}"
     )
+
+# --- Manager Tools ---
+@manager_agent.tool
+async def extract_features(ctx: RunContext[None], meeting_name: str, file_path: str) -> str:
+    """Extract meeting features via feature_agent"""
+
+    print("\n------- Manager Extract Features Tool -------\n")
+    print(f"[DEBUG] Manager: Extracting features from {meeting_name} at {file_path}\n")
+
+    # Call feature agent tool
+    result = await feature_agent.run(
+        f'Extract features for meeting "{meeting_name}" from file "{file_path}"'
+    )
+
+    print(f"[DEBUG] Feature Agent Output: {result.output}\n")
+    return f"Features extracted for meeting '{meeting_name}'.\n{result.output}"
 
 
 # --- Main Interactive Loop ---
@@ -89,11 +104,11 @@ async def main():
     while True:
         user_input = input("You: ").strip()
         if user_input.lower() in {"exit", "quit"}:
-            print("\n[DEBUG] Session ended, Goodbye!")
+            print("\n[DEBUG] Session ended, Goodbye!\n")
             break
 
         response = await manager_agent.run(user_input, message_history=message_history)
-        print(f"\n[Transcript Assistant Response]\n{response.output}\n")
+        print(f"\n[meeting Assistant Response]\n{response.output}\n")
         message_history.extend(response.new_messages())
 
 

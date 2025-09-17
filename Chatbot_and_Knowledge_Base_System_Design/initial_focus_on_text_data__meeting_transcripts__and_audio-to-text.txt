@@ -1,0 +1,4 @@
+Feature: Initial focus on text data, meeting transcripts, and audio-to-text
+============================================================================
+
+The system's initial focus will be on text data, meeting transcripts, and audio converted to text. Support for images may be added at a later stage.

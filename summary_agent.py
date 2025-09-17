@@ -13,7 +13,7 @@ load_dotenv()
 
 # Setup Google model provider
 provider = GoogleProvider(api_key=os.getenv("GOOGLE_API_KEY"))
-model = GoogleModel("gemini-1.5-flash", provider=provider)
+model = GoogleModel("gemini-2.5-flash", provider=provider)
 
 # -------------------------------
 # Models
@@ -26,10 +26,9 @@ class Summary(BaseModel):
 # -------------------------------
 summary_agent = Agent(
     model,
-    output_type=Summary,
     system_prompt=(
         "You are a meeting summarization assistant.\n"
-        "Your task is to generate a summary of meeting transcripts."
+        "Your task is to generate a summary of meeting at provided file path.\n"
     ),
 )
 
@@ -37,7 +36,7 @@ summary_agent = Agent(
 # Summary Tool
 # -------------------------------
 @summary_agent.tool
-async def generate_meeting_summary(ctx: RunContext[None], meeting_name: str) -> str:
+async def generate_meeting_summary(ctx: RunContext[None], meeting_name: str, file_path) -> str:
     """
     Generates a short summary of the meeting transcript identified by its unique meeting name,
     saves it in database.json and also writes it into <meeting_name>_summary.txt.
@@ -46,11 +45,15 @@ async def generate_meeting_summary(ctx: RunContext[None], meeting_name: str) -> 
     print("\n------- Generate Meeting Summary Tool -------\n")
     
     try:
-        with open("database.json", "r") as db_file:
+        
+        folder_name = meeting_name.replace(" ", "_")
+        db_path = os.path.join(folder_name, "database.json")
+        
+        with open(db_path, "r") as db_file:
             db_data = json.load(db_file)
 
         # Find the meeting
-        meeting = next((m for m in db_data if m.get("title") == meeting_name), None)
+        meeting = next((rec for rec in db_data if rec.get("filepath") == file_path), None)
         if not meeting:
             return f"[DEBUG] Meeting '{meeting_name}' not found."
 
@@ -63,30 +66,25 @@ async def generate_meeting_summary(ctx: RunContext[None], meeting_name: str) -> 
             model,
             output_type=Summary,
             system_prompt=(
-                f"You are summarizing a meeting transcript.\n"
-                f"The discussion in this meeting was about an app named '{meeting_name}'.\n"
-                "Summarize all the important points discussed clearly and concisely.\n"
-                "Do not add new information or opinions."
+                f"You are summarizing the following meeting transcript for '{meeting_name}'.\n"
+                f"Summarize all the important points discussed clearly and concisely.\n"
+                f"Do not add new information or opinions."
             ),
+            tools=[] 
         )
 
         # Run contextual agent → returns Summary model
         response = await contextual_summary_agent.run(transcript_text)
         summary_output: Summary = response.output
 
-        # Save summary to DB
-        meeting["summary"] = summary_output.summary
-        with open("database.json", "w") as db_file:
-            json.dump(db_data, db_file, indent=4)
-
-        # Also save to a new file
-        file_name = f"{meeting_name.replace(' ', '_')}_summary.txt"
-        with open(file_name, "w") as summary_file:
+       # Save summary into the same folder as database.json
+        summary_path = os.path.join(folder_name, "summary.txt")
+        with open(summary_path, "w") as summary_file:
             summary_file.write(f"Meeting: {meeting_name}\n")
             summary_file.write("=" * (9 + len(meeting_name)) + "\n\n")
             summary_file.write(summary_output.summary)
 
-        return f"\n\nSummary for meeting '{meeting_name}' saved in database.json and {file_name}"
+        return f"\n\nSummary for meeting '{meeting_name}' saved in {file_path}"
 
     except FileNotFoundError:
         return "[ERROR] Database file not found."

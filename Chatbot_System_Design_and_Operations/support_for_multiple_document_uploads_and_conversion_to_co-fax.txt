@@ -1,0 +1,4 @@
+Feature: Support for multiple document uploads and conversion to co-fax
+========================================================================
+
+The system will include a mechanism to upload multiple documents and convert them to co-fax. This feature is expected to support various document types such as Google Docs, Word, and PDF, with the ability to transcribe them. Backend support will be provided for document types like Excel, PDF, text, and meeting transcripts, ensuring easy registration of these documents (referred to as chat docs) at a high abstract or channel level within the application.
