@@ -1,4 +1,0 @@
-Feature: API integration for message extraction (up to six months backup)
-==========================================================================
-
-The team discussed the possibility of integrating an API to extract messages for backup purposes, specifically noting that messages up to six months old could be extracted. The idea of selectively polling was suggested to avoid troubling users. It was noted that accessing a business account through an API could allow for polling and sharing of chat backups. The existing WhatsApp API and its backup capabilities were mentioned, particularly the ability to extract past six months or even a year's worth of data for insights. The process of handling backups from Google Drive or mobile for Android devices was also discussed, with the potential to restore whole backups from a single file. The system aims to listen for new data and also retrieve old data from these backups, which would then need to be filtered.

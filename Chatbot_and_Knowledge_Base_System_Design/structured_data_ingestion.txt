@@ -1,4 +1,0 @@
-Feature: Structured data ingestion
-===================================
-
-The strategy is to start with structured data ingestion, specifically for predefined, deterministic FAQs or facts, as this type of data allows answers to map directly to questions without needing chunking, making it easier to maintain. Most of the information for the current client is structured, like FAQs. This will be the initial phase of the chatbot's evolution. Additionally, for facts that change periodically (around 20-40 dynamic facts like pricing, schedules, or policy updates), these should be stored in a database and updated via a simple admin dashboard. The system will then regenerate embeddings and replace outdated ones to ensure accurate real-time responses. The overall flow should finalize by starting with structured data ingestion for FAQs and static information.

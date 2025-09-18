@@ -1,4 +1,0 @@
-Feature: Dynamic fact updates via admin dashboard
-==================================================
-
-Some facts, such as pricing, schedules, or policy updates, will change periodically. It is estimated that there will be around 20–40 such dynamic facts that require frequent updates. These dynamic facts should be stored in the database and manageable via a simple admin dashboard. An admin user will be able to update these values and push the changes through the dashboard. The system must then regenerate embeddings and replace outdated ones to ensure that the chatbot provides accurate, real-time responses based on the most current information.

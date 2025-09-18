@@ -21,9 +21,6 @@ temp_manager = Agent(
         "You are the Temp Manager Agent for testing purposes.\n\n"
         "Your only responsibility:\n"
         "- Use the feature agent tool to extract meeting features when requested.\n\n"
-        "Rules:\n"
-        "- Do not attempt to save or summarize meetings.\n"
-        "- Keep responses short and clear."
     ),
 )
 
@@ -52,19 +49,19 @@ async def main():
     message_history = []
 
     # Initial greeting
-    response = await temp_manager.run("Hi!", message_history=message_history)
+    response = await temp_manager.run("please extract features for meeeting named TEMP and path is Examples/2.txt", message_history=message_history)
     print(f"{response.output}\n")
     message_history.extend(response.new_messages())
 
-    while True:
-        user_input = input("You: ").strip()
-        if user_input.lower() in {"exit", "quit"}:
-            print("\n[DEBUG] Session ended, Goodbye!\n")
-            break
+    # while True:
+    #     user_input = input("You: ").strip()
+    #     if user_input.lower() in {"exit", "quit"}:
+    #         print("\n[DEBUG] Session ended, Goodbye!\n")
+    #         break
 
-        response = await temp_manager.run(user_input, message_history=message_history)
-        print(f"\n[Temp Manager Response]\n{response.output}\n")
-        message_history.extend(response.new_messages())
+    #     response = await temp_manager.run(user_input, message_history=message_history)
+    #     print(f"\n[Temp Manager Response]\n{response.output}\n")
+    #     message_history.extend(response.new_messages())
 
 
 if __name__ == "__main__":

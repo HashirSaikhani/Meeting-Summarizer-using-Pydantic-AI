@@ -1,4 +1,0 @@
-Feature: Knowledge base formats (Google Doc, Word, PDF)
-========================================================
-
-The system needs to support various knowledge base formats, including Google Docs, Word documents, and PDFs. The initial ingestion of the knowledge base and subsequent sub-section updates will be handled. The system will have a mechanism to upload multiple documents in these formats and convert them. The backend is responsible for transcribing and processing these documents. While Excel chat is not supported, there's a discussion about the importance of Excel data and the need for a mechanism to handle raw data from it, potentially through a structured form. The aim is to easily support various formats like Excel, PDF, text, meeting transcripts, and Google backups, by registering the data and converting unstructured data into structured facts for the system.

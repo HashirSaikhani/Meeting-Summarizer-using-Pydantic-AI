@@ -1,4 +1,0 @@
-Feature: Escalation tracking dashboard with metrics
-====================================================
-
-A dashboard will be implemented to manage and track escalations when the chatbot cannot answer a query, such as payment verification. This dashboard will allow human agents to view open escalated queries, see who is handling them, and reply directly through it, with the backend sending responses via the WhatsApp API. It will also report key metrics including total escalations per day and average response time.

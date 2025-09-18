@@ -1,4 +1,0 @@
-Feature: Automatic embedding regeneration for updated facts
-============================================================
-
-The system needs to handle approximately 20-40 dynamic facts (e.g., pricing, schedules, policy updates) that change periodically. These facts will be stored in a database and updated through a simple admin dashboard. Upon an admin pushing changes, the system should automatically regenerate embeddings for these updated facts and replace the outdated ones to ensure the chatbot provides accurate, real-time responses.

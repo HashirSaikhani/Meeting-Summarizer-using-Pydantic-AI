@@ -1,4 +1,0 @@
-Feature: Filtering and cleaning of imported historical data
-============================================================
-
-For WhatsApp integration, historical data can be imported through backup files from Google Drive or iCloud, allowing for the retrieval of all historical messages at once. After importing, the system will be able to filter and clean outdated or irrelevant messages. This capability will enable the system to analyze seasonality and trends from a year's worth of chat backups, if provided by the client.
