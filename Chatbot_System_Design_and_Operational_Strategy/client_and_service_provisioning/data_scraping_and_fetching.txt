@@ -1,0 +1,8 @@
+Main Feature: Client and Service Provisioning
+Feature Block:
+  - Data scraping and fetching
+    -- Scrape and fetch latest rates/schedules
+    -- Scrape public schedules (e.g., exam schedules)
+==============================================
+
+In the next phase, we will definitely commit this too, but the thing is, we can scrape and fetch latest rates ourselves, latest attempts, because this is scheduled, public schedule, which exam’s schedule is wanted.

@@ -1,0 +1,11 @@
+Main Feature: Client and Service Provisioning
+Feature Block:
+  - Data transformation and conversion
+    -- Transcribe documents/audio/video
+    -- Convert documents to 'co-fax' format
+    -- Convert video information to text form
+======================================================
+
+but I expect that someone’s doc will be Google Doc, someone’s Word, someone’s PDF, so I can also transcribe, for us, all things same
+Some data we don’t have understanding of; we need to transcribe and understand it to reply. Audio, yes, we need to handle; minutes should be considered.
+Audio: I mean the data coming, we need to have our mechanism for the received data, what action to take.

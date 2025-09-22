@@ -22,20 +22,8 @@ class Summary(BaseModel):
     summary: str
 
 # -------------------------------
-# Main Agent Definition
-# -------------------------------
-summary_agent = Agent(
-    model,
-    system_prompt=(
-        "You are a meeting summarization assistant.\n"
-        "Your task is to generate a summary of meeting at provided file path.\n"
-    ),
-)
-
-# -------------------------------
 # Summary Tool
 # -------------------------------
-@summary_agent.tool
 async def generate_meeting_summary(ctx: RunContext[None], meeting_name: str, file_path) -> str:
     """
     Generates a short summary of the meeting transcript identified by its unique meeting name,

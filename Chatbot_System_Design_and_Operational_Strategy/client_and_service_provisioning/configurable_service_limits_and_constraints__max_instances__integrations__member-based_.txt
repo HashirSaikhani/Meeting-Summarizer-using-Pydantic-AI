@@ -1,0 +1,6 @@
+Main Feature: Client and Service Provisioning
+Feature Block:
+   --- Configurable Service Limits and Constraints (Max Instances, Integrations, Member-Based)
+===========================================================================================================
+
+Even if it’s single-tenant, we have to consider maximum services per tenant. That’s business: we set limits and charge accordingly. The service may have limits: maximum instances it can serve, each with a master service, a second service, a third, etc. They can adjust or scale it; our cause grows with that. For now, we can set constraints based on members. We decide how many integrations can be done, who can handle which instances. The system will transparently manage escalations, constraints, and service assignments.

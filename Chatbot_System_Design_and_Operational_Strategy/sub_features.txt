@@ -1,0 +1,573 @@
+Extracted Hierarchical Features:
+
+1) Client and Service Provisioning
+   - Client Onboarding Pipeline
+   - Service Deployment and Configuration
+   -- Knowledge Base Management
+   --- Initial Knowledge Base Ingestion
+   --- Support for Various Document Formats (Google Doc, Word, PDF, Excel, Text, Meeting Transcripts)
+   --- Document Transcription
+   --- Multiple Document Upload Mechanism
+   --- Document Conversion to Standardized Internal Format
+   --- Sub-section Updates for Knowledge Base
+   --- Static and Dynamic Knowledge Base Distinction
+   --- Structured Data Registration
+   --- Unstructured Data Handling
+   -- Raw Data Intake (Specific Format or Template-Based)
+   -- Chat Data Processing
+   --- Chat Listening Feature (for Event Chats)
+   --- Chat Parsing
+   --- Backend Processing for Chat and Documents
+   -- External Data Integration
+   --- Integration with Business Accounts (e.g., WhatsApp Business API)
+   --- Message Extraction (Historical Data up to Six Months via API)
+   --- Backup File Handling (Mobile Full Backup, Google Drive Backup File Sharing)
+   --- Data Management and Maintenance for Client-Provided Backup Files
+   --- Scraping and Fetching Latest Public Schedule Data
+   --- Server-Side Information Registration
+   --- Protocol for Client Review of Individual Information
+   -- Dynamic Content Management
+   --- Dynamic Information Management via LLM
+   --- Master Data Updates Interface (Dashboard Form for Feeding/Updating Information)
+   --- Dynamic Content Update Mechanism (Converts to Embed, Updates Old Embed)
+   --- Function Calling Mechanism for Fetching Dynamic Data from DB
+   --- Database Persistence for Training Data
+   -- Multi-Service / Tenant Management
+   --- Single-Tenant Architecture (with Multiple Services per Tenant)
+   --- Multiple Knowledge Bases per Unique Deployment
+   --- Service Scaling and Adjustment Mechanisms
+   --- Configurable Service Limits and Constraints (Max Instances, Integrations, Member-Based)
+   --- Transparent Management of Service Assignments
+   -- Support for Multiple Message Types (Text, Audio, Images)
+   -- Data Filtering for Old/New Data Separation
+   -- Bulk Data Extraction (for Historical Data)
+
+Diverse Data Ingestion and Processing
+  - Ingestion of various document formats
+    -- Google Docs
+    -- Word documents
+    -- PDF files
+    -- Excel data
+    -- Text files
+    -- Meeting transcripts
+    -- Google backup files
+    -- Email content
+  - Support for multiple data types
+    -- Text messages
+    -- Audio messages
+    -- Images
+    -- Videos
+  - Data transformation and conversion
+    -- Transcribe documents/audio/video
+    -- Convert documents to 'co-fax' format
+    -- Convert video information to text form
+  - Data processing mechanisms
+    -- Backend processing for data conversion and parsing
+    -- Handle structured data (no chunking needed)
+    -- Handle unstructured data (e.g., for comprehensive type facts)
+    -- Chunking for unstructured data
+    -- Extract audio from video
+    -- Treat extracted video audio as audio data
+  - Data management and storage
+    -- Mechanism to upload multiple documents
+    -- Register data at high abstract or channel level
+    -- Fetch dynamic content from database
+    -- Store stack information with auto-updates
+    -- Store raw information (with configurable retention period)
+    -- Retain old data while ingesting new data without overlap
+  - Data scraping and fetching
+    -- Scrape and fetch latest rates/schedules
+    -- Scrape public schedules (e.g., exam schedules)
+  - Data filtering and prioritization
+    -- Decide which images/videos to process or ignore
+    -- Totally ignore videos initially (but view them)
+    -- Discard unnecessary data (e.g., won't process 3D)
+  - System limits and rate limiting
+    -- User-based rate limits (e.g., per hour, per minute)
+    -- Rate limits per message type (text, audio, image, video)
+    -- Configurable system limits for data length/size (e.g., audio length, text length, number of image files)
+    -- Configurable page limits for documents (e.g., 1000 pages, 300 pages, 200 pages)
+    -- Rate limits per bot interaction (e.g., 60 per hour)
+    -- Impose limits on audio processing (e.g., discard if too long)
+  - Data review and update cycles
+    -- Configurable review cycle for new information (e.g., one to two weeks)
+    -- Ingest and review collected facts/knowledge
+    -- Approve and add concrete information to the system after review
+    -- Reprocess raw information to update text while preserving context
+    -- Mechanism to identify duplicate or similar information
+    -- Scheduled updates in panels (requiring user input for dynamic adjustments)
+    -- Configure automatic or initial review level for new reviews
+  - Security and audit implementation (partial)
+
+Dynamic Knowledge Base Management
+  - Data Ingestion and Management
+    -- Fetch dynamic content from database
+    -- Utilize function calling mechanisms for data interaction
+    -- Scrape and fetch latest dynamic information (e.g., rates, schedules)
+    -- Implement data separation for different information sets (e.g., old vs. new semester data)
+    -- Ingest and add new facts/knowledge after review
+    -- Support configurable review cycles for new information (e.g., 1-2 weeks)
+    -- Retain raw information for configurable periods
+    -- Reprocess information to update text while preserving context
+    -- Ensure new ingestion does not overlap with existing data
+    -- Store and auto-update stack information
+    -- Store dynamic content in database for persistence
+    -- Attach in-memory data for persistence (training form)
+  - Knowledge Base Configuration and Structure
+    -- Manage both static and dynamic knowledge bases
+    -- Configure the variety of the dynamic knowledge base (e.g., single entity by default, configurable)
+    -- Define functions for fetching specific dynamic data (e.g., course rates)
+  - Dynamic Information Update Interface
+    -- Provide an interface for master users to update dynamic information
+    -- Dashboard form for users to feed new information
+    -- Pre-fill update forms from existing data
+    -- Convert updated information to embeddings and re-update old embeddings upon submission
+    -- Display new information on the dashboard
+  - Q&A and Intent Resolution Logic
+    -- Determine user intent from prompts
+    -- Respond from knowledge base based on intent
+    -- Escalate to human if similarity score is low or after repeated failed attempts
+    -- Identify if incoming information is a duplicate or a new question on a similar topic
+    -- Implement similarity checks for highly relevant facts to mark duplicates (e.g., 4-5 close matches)
+    -- Build a mechanism for dynamic duplicate handling
+    -- Support LLM-driven automatic fetching of answers for dynamic questions
+  - Multi-tenancy and Scalability
+    -- Support multiple knowledge bases under a unique deployment
+    -- Transparently manage escalations, constraints, and service assignments for tenants
+    -- Consider maximum services and instances per tenant
+  - Automation and Review Workflow
+    -- Allow configuration for automatic or initial level reviews of new information
+    -- Enable automation for new information processing once confidence levels are satisfactory
+    -- Implement scheduled updates (with user input for dynamic adjustments)
+    -- Establish protocols for individual review of respective information by external entities
+  - Monitoring and Analytics
+    -- Dashboard analytics to display topics, frequency, matches, and trends
+    -- Provide insights on message relevance, new questions, and similarity patterns
+
+4) Intelligent Interaction Handling
+   - Data Ingestion and Knowledge Base Management
+        -- Implement support for various document formats (Google Doc, Word, PDF, Excel, text, meeting transcript, Google backup).
+        -- Develop mechanisms to upload multiple documents and convert them to an internal standard format.
+        -- Integrate transcription capabilities for documents and audio.
+        -- Handle ingestion and processing of structured and unstructured data, including processing structured data without chunking.
+        -- Implement filtering and separation logic for historical and new data.
+        -- Create a configurable review cycle for new facts/knowledge ingestion.
+        -- Develop reprocessing logic for raw information to update text while preserving context.
+        -- Implement mechanisms to prevent new data ingestion from overlapping old data.
+        -- Develop auto-update functionality for stack information.
+        -- Implement configurable automatic review levels for new information.
+        -- Build functionality to extract bulk chat exports and historical data for analysis.
+   - Dynamic Content Management
+        -- Develop LLM-based automatic extraction of dynamic information.
+        -- Implement fetching of answers for specific questions from master data sources.
+        -- Build an interface (dashboard form) for users to update dynamic content.
+        -- Implement conversion of updated dynamic content to embeddings and updating of existing embeddings.
+        -- Integrate a function calling mechanism to fetch dynamic information from the database (e.g., course rates).
+   - Message Type and Multimedia Handling
+        -- Implement backend processing for parsing various chat messages.
+        -- Develop a listening feature for event-driven chats.
+        -- Support handling of text, audio, image, and video messages.
+        -- Implement functionality to send designed posters/brochures (images) as responses.
+        -- Integrate audio transcription from videos and convert video information to text for processing.
+        -- Develop logic for discarding unnecessary data (e.g., 3D data).
+        -- Implement configurable system limits for message length/size (e.g., audio length, text length, number of image files).
+        -- Develop functionality to send warning messages when message limits are exceeded.
+        -- Implement rule-based message processing to ensure adherence to rate limits and message type constraints.
+   - Intent Determination and Response Routing
+        -- Develop intent determination logic based on user prompts.
+        -- Implement routing mechanisms to direct messages to the appropriate owner or knowledge base.
+        -- Develop automated response logic for irrelevant content.
+        -- Implement filtering mechanisms for repeated queries (distinguishing relevant vs. irrelevant).
+        -- Integrate high-level checks to flag repeated/spam messages without full processing.
+        -- Implement conditional transcription of large videos if manageable for intent analysis.
+   - Human Escalation Workflow
+        -- Implement escalation triggers based on low similarity scores, repeated failed attempts, or explicit user requests.
+        -- Develop a state management system for chatbot control handover to human and resumption after escalation closure.
+        -- Implement context (thread) preservation during human escalation.
+        -- Develop temporary storage for escalation-related information.
+        -- Integrate human response capabilities via dashboard API or direct WhatsApp Business UI.
+        -- Implement a mechanism to provide humans with sufficient context for escalated interactions.
+        -- Develop functionality to track and navigate to specific escalated chats.
+        -- Implement categorization of human escalations.
+        -- Develop an assignment system for escalated tickets to human agents based on timing/availability.
+        -- Implement tracking and re-assignment logic for unresponded escalations within defined timeframes.
+        -- Integrate randomized escalation assignments within duty windows.
+        -- Develop a fallback assignment system for escalation numbers.
+        -- Implement shift management for human agents.
+        -- Develop support for configuring multiple service streams/departments per client.
+   - Rate Limiting and Abuse Prevention
+        -- Implement configurable user-based rate limits per message type and bot interaction.
+        -- Develop mechanisms to identify and block/flag users for repeated similar irrelevant queries.
+        -- Implement holding of replies for flagged users for a configurable period (e.g., 24 hours).
+        -- Develop tracking and flagging of users for sending irrelevant passages, long multimedia files, or excessive messages.
+        -- Implement warning messages for users approaching or exceeding message rate limits.
+        -- Develop a dynamically configurable flag list and rules, manageable from the frontend.
+        -- Implement triggers for human review based on repeated irrelevant queries.
+   - Session Management and Analytics
+        -- Develop a system for managing multiple sessions/threads independently per user.
+        -- Implement configurable session termination criteria (e.g., no response after X hours/intervals).
+        -- Develop data recording mechanisms for all interactions (including emails) and user mobile numbers.
+        -- Implement calculation logic for success rates and satisfaction/quality ratings per session.
+        -- Develop tracking for interaction duration and related information for metrics generation.
+        -- Implement handling of 24-hour activity windows.
+        -- Develop dashboard components to display topics, frequency, matches, trends, message relevance, new questions, and similarity patterns.
+        -- Implement monitoring of support activities and tracking of user interactions (website/dashboard).
+        -- Develop support and comparison reporting functionalities.
+   - Similarity Detection and Duplicate Handling
+        -- Implement automatic marking of highly relevant messages (based on similarity score) as new information.
+        -- Develop a mechanism for human verification of new facts.
+        -- Implement logic to identify similar information as existing or new questions.
+        -- Develop functionality to mark closely matching facts as duplicates.
+        -- Implement dynamic handling for duplicate detection.
+        -- Develop auto-retrieval of prior interactions before a new question.
+
+Seamless Human Escalation
+  - Intervention recognition logic and flow diagram implementation
+  - Polling and scraping mechanism for real-time data (e.g., rates, exam schedules)
+  - Protocol for human review of server-side FAX-registered information
+  - Manual triggering of application functions
+  - Automated reminders and fallback mechanism to human escalation
+  - Chatbot forwarding conversation to human agents
+    -- Initiation of chat for forwarding
+    -- Approval process for escalation template messages
+  - Human agent interaction management
+    -- Utilizing existing WhatsApp Business account for replies
+    -- Manual human responses via WhatsApp Business UI
+    -- Ensuring human replies are not automated post-escalation
+    -- Enforcing one-to-one conversation model (API constraint)
+    -- Providing contextual information to human agents for identification and action
+    -- Tracking and navigating to specific chat sessions for human agents
+  - Dedicated dashboard for escalation monitoring and management
+    -- Tracking number of escalations and attended users
+    -- Integration with WhatsApp Business account for human agents to reply from dashboard
+    -- Searching specific chats within WhatsApp Business from dashboard
+    -- Interface for human agents to manage escalated messages
+    -- Consolidated view of user interactions on dashboard
+    -- Support and comparison reports
+  - API context awareness and reply tracking
+    -- API awareness of conversation context during escalation
+    -- Polling chat session to track who replied
+    -- Dashboard user replying via API
+  - Categorization and naming of client/service streams (e.g., Operations, Support)
+  - Ticket generation and assignment to human agents
+    -- Human agents picking up assigned tickets
+  - Forwarding conversation data (e.g., images) to external channels for human processing
+    -- Indicating source number for forwarded messages
+  - Notification triggering upon human agent replies
+  - API polling WhatsApp for replies from external channels
+    -- Blocking/waiting mechanism for polled replies
+  - Chatbot state management during human escalation
+    -- Chatbot state preservation
+    -- Chatbot waiting for human agent to close escalation before resuming control
+    -- Chatbot taking control back after escalation closure
+  - Managing and storing multiple conversation sessions/threads per user
+  - Temporary storage of all relevant information during escalation
+  - Handling explicit user requests to 
+
+6) Human Agent Management Tools
+   - Escalation Management
+        -- Forwarding conversations to human agents
+        -- Triggering human intervention based on chatbot helplessness (e.g., image verification)
+        -- Providing context and information to human agents for escalated chats
+        -- Explicit user request for human agent connection
+        -- Assigning escalations to specific human agents
+        -- Time-based escalation assignment
+        -- Re-assignment/fallback mechanism for unaddressed escalations
+        -- Tracking module for unaddressed escalations with time-based triggers
+        -- Escalation randomization (e.g., for load balancing)
+        -- Escalator registration and management system
+        -- Chatbot relinquishing control to human until human responds (takeover)
+        -- Chatbot resuming control after human escalation is closed
+        -- Chatbot state management during human escalation (waiting/holding responses)
+        -- Temporary storage of conversation context during escalation
+        -- Handling multi-context queries during human escalation
+        -- Post-escalation query handling
+   - Human Agent Interface & Interaction
+        -- Human agents handling forwarded conversations
+        -- Human agents replying from the same communication channel/number as the chatbot
+        -- Integration with WhatsApp Business account for human replies (using WhatsApp Business account UI)
+        -- Dashboard integration for human agent replies via API
+        -- Forwarding rich media (e.g., images) to human agents
+        -- Processing and transcribing rich media (audio) for human agent context
+        -- Notification system for human agent messages/actions
+        -- Hybrid handling of escalations (WhatsApp direct reply vs. dashboard reply)
+   - Dashboard & Monitoring
+        -- Dedicated dashboard for managing human escalations
+           --- Displaying number of escalations
+           --- Displaying attended users
+           --- Full view of escalations
+           --- Display of merged/multiple session contexts for human agents
+        -- Tracking and navigating escalated chats for human agents
+        -- API-based tracking of human agent replies and context
+        -- Escalator tracking and monitoring via dashboard
+        -- Dashboard analytics (topics, frequency, matches, trends in messages/interactions, relevance, new questions, similarity patterns)
+        -- Monitoring support activities and escalation flow
+        -- Comprehensive user interaction tracking on dashboard for support
+        -- Recording and displaying email interactions on the dashboard
+   - Agent & Workflow Configuration
+        -- Template message approval process for human agent replies
+        -- Categorization/routing of escalations to specific support teams/streams
+        -- Ticket management system for assigning escalations to human agents
+           --- Assignment of tickets to specific human agents
+           --- Accessing tickets via internal application or web interface
+        -- Human agent shift management and duty scheduling
+        -- Fallback assignment for human agents
+        -- Shift-based availability management
+        -- User-input driven dynamic adjustments for system updates (e.g., agent rules, knowledge base)
+        -- Configuration for automatic vs. manual review of new information (knowledge base updates)
+   - User Behavior & Flagging
+        -- User flagging/blocking mechanism for inappropriate behavior (e.g., repeated irrelevant queries)
+           --- Marking users to hold replies for a specified duration (e.g., 24 hours)
+        -- Dynamic and configurable flagging system for escalation triggers (e.g., user behavior, low similarity score, irrelevant passages, long media files, too many messages)
+        -- Front-end configurable rules for escalation flags
+        -- Rate limiting mechanism for user messages, triggering escalation or warnings
+           --- Sending warnings to users nearing/exceeding quota
+        -- Pre-processing incoming messages (spam detection, repetition filtering, media handling) to inform escalation
+        -- Repetition-based human review trigger (e.g., after N repeated irrelevant queries)
+        -- Duplicate detection for new/similar user queries
+   - Data & Performance Metrics
+        -- Recording of human agent interactions
+        -- Session termination logic (e.g., no response within 24 hours/4 hours)
+        -- Satisfaction/quality rating calculation per session
+        -- Tracking user data (mobile number, interaction duration) for metrics and statistics
+        -- Review cycle for human-verified information (knowledge base updates)
+
+7) System Monitoring and Control
+   - Escalation Management
+     -- Separate dashboard for escalations
+     -- Tracking escalation count and attended users
+     -- Full view of escalations from dashboard
+     -- Monitoring escalation processes
+   - Process Monitoring and Management
+     -- Independent monitoring, testing, and management of processes via dashboards
+     -- Keeping track of users, sessions, and escalations without conflicts
+     -- Monitoring support activities
+     -- Release tracking
+   - Message and Interaction Handling Control
+     -- API for tracking chat session context (replies, who replied)
+     -- Dashboard user replying via API integration
+     -- Handling new messages according to defined rules
+        --- Rate limit enforcement
+        --- Message type constraints (text, audio, images, video)
+        --- Processing priority maintenance
+     -- Dynamic and configurable flagging system
+        --- Displaying distinct flagging reasons on dashboard
+        --- Front-end configuration for adding flagging reasons
+        --- Support for configurable flagging rules
+     -- New message identification and verification logic
+        --- Bypassing filters for low similarity scores
+        --- Automatic marking of highly relevant messages as new information based on similarity scores
+        --- Human verification of new facts
+        --- Displaying new information on dashboard
+        --- Enabling automation based on satisfactory confidence levels
+     -- Integration with matching process (support bars, escalation, verification in dashboard)
+   - Data Tracking and Analytics
+     -- Dashboard analytics display for:
+        --- Topics
+        --- Frequency
+        --- Matches
+        --- Trends in messages and interactions
+        --- Message relevance
+        --- New questions
+        --- Similarity patterns
+     -- Tracking and viewing all website user interactions on dashboard
+     -- Recording and reflecting email information on dashboard for insights
+     -- Calculation of success rate based on successful user answers
+     -- Session termination logic (e.g., no user response within 24 hours or after four-hour intervals)
+     -- Calculation of satisfaction or quality rating per session
+     -- Tracking user mobile number, duration, and related information for metrics and statistics
+     -- Support and comparison reports
+
+Performance Analytics and Insights
+  - Dashboard Analytics Display
+    -- Display topics, frequency, matches, and trends in messages and interactions
+    -- Provide insights on message relevance, new questions, and similarity patterns
+  - Integration with Matching Process
+    -- Support bars
+    -- Escalation
+    -- Verification in dashboard
+    -- Backup
+    -- Release tracking
+  - Flow Monitoring
+    -- Module flow
+    -- Dashboard checklists
+    -- Monitoring support activities
+  - Website User Interaction Tracking
+    -- Track all user interactions
+    -- View all website interactions in the dashboard
+  - Reporting Capabilities
+    -- Support reports
+    -- Comparison reports
+  - Email Interaction Recording
+    -- Record information from sent emails
+    -- Reflect email information on the dashboard for insights
+  - Raw Information Storage Management
+    -- Determine amount of raw information to store
+  - Success Rate Calculation
+    -- Analyze successful answers
+    -- Calculate success rate (e.g., daily)
+  - Session Termination Logic
+    -- Terminate session if user does not respond within 24 hours after reply
+    -- Terminate session after four-hour intervals of inactivity
+  - Quality and Satisfaction Rating
+    -- Calculate satisfaction or quality rating per session
+  - User Data Tracking for Metrics and Statistics
+    -- Track user's mobile number
+    -- Track session duration and all related information
+  - Activity Window Handling
+    -- Handle 24-hour activity windows
+    -- Handle short response windows
+  - Escalated Queries Handling
+    -- Handle escalated queries after the escalation process
+
+1) Knowledge Base Curation
+   - Ingestion & Data Registration
+     -- Support for multiple document formats (Google Doc, Word, PDF, Excel, Text, Meeting Transcripts)
+     -- Transcription of various document types
+     -- Upload mechanism for multiple documents
+     -- Conversion to a standardized format (e.g., co-fax)
+     -- Backend processing for document parsing and registration
+     -- Registration of structured and unstructured data
+     -- Handling of Google backup data
+   - Data Management & Storage
+     -- Persistence of dynamic information in a database
+     -- In-memory persistence
+     -- Storage of static information
+     -- Storage of stack information with auto-updates
+     -- Retention of raw ingested information (configurable duration)
+     -- Retention of old data
+   - Dynamic Content Handling
+     -- Interface for master users to update dynamic data
+     -- Dashboard form for user input/updates of information
+     -- Mechanism to convert updated information to embeds
+     -- Mechanism to update old embeds
+     -- Function calling mechanism/tools to fetch dynamic content from the database
+   - Review & Approval Cycle
+     -- Configurable review cycle duration
+     -- Protocol for server-side review of registered information
+     -- Approval process for concrete information
+     -- Configurable automation levels for new reviews (automatic or initial)
+     -- Display of new information on dashboard for review
+     -- Automation enablement based on confidence levels
+   - Content Updates & Maintenance
+     -- Reprocessing of data to update text while preserving context
+     -- Prevention of new ingestion from overlapping old data
+     -- Scheduled updates (requiring user input for dynamic adjustments)
+   - Duplicate Detection
+     -- Identification of similar/already asked questions
+     -- Similarity checks for highly relevant facts
+     -- Mechanism to mark duplicate facts (e.g., 4-5 close matches)
+   - Knowledge Base Configuration
+     -- Configuration of dynamic knowledge base variety
+     -- Entity configuration (default one, but configurable)
+     -- Support for multi-tenancy (multiple knowledge bases with unique deployment)
+   - Dashboard Analytics (to inform curation)
+     -- Display of topics, frequency, matches, and trends in interactions
+     -- Display of message relevance, new questions, and similarity patterns
+
+Historical Data Analysis
+  - Data Extraction and Ingestion
+    -- Extract historical data (up to six months/one year/full 365-day cycles).
+    -- Selective polling of data via API.
+    -- API integration for message extraction (up to six months).
+    -- Handle mobile backups (full/single file) for data ingestion.
+    -- Ingestion of static and dynamic content from a database.
+    -- Handle different message types (text, audio, images).
+  - Data Pre-processing and Filtering
+    -- Filter data to separate old/new semester information.
+    -- Remove irrelevant or sensitive information.
+  - Dynamic Information Management
+    -- Automatic extraction of dynamic information using LLMs.
+    -- Function calling mechanism to fetch dynamic information/answers from the database.
+    -- Manage dynamic content (e.g., 25-40 expected cases) to be fetched from DB.
+    -- Interface for master updates to dynamic information (dashboard form).
+       --- Convert updates to embeddings and re-update old embeddings.
+  - Analytical Insights and Reporting
+    -- Identify recurring questions/intents based on historical patterns (e.g., every 3/6 months).
+    -- Dashboard analytics display:
+       --- Topics
+       --- Frequency of messages/interactions
+       --- Matches
+       --- Trends
+       --- Message relevance insights
+       --- New question identification
+       --- Similarity patterns
+    -- Track all user interactions (including website and email).
+    -- Support and comparison reports.
+    -- Store and manage raw information for analysis.
+    -- Calculate success rate for question/answer pairs.
+    -- Calculate satisfaction/quality rating per session.
+    -- Generate general metrics and statistics.
+  - Session and User Tracking
+    -- Implement session termination logic (e.g., no user response within 24 hours or after 4-hour intervals).
+    -- Track user mobile number and session duration.
+    -- Handle 24-hour activity windows.
+
+11) Communication Platform Integrations
+   - Third-Party API Integration
+        -- WhatsApp Business Account API Integration
+           --- Message extraction and backup (up to 6 months)
+           --- Support for one-to-one conversations (no group chats)
+           --- Scalability handling for active users (e.g., 5k, 20k)
+           --- Integration with Meta web service (BSPs)
+   - Multimodal Message Handling
+        -- Processing of text, audio, image, and video messages
+        -- Video message processing pipeline
+           --- Initial ignoring of video content
+           --- Audio extraction from video
+           --- Conversion of video audio to text format
+        -- Discarding of unnecessary data (e.g., 3D models)
+        -- Configurable system limits for message types and length
+           --- Audio length limits
+           --- Text length limits
+           --- Image file quantity limits (e.g., 200 files)
+           --- Bot interaction rate limits (e.g., 60 per hour)
+   - Data Ingestion and Management
+        -- Filtering and separation of old vs. new data
+        -- Dynamic content fetching from database
+        -- Dashboard interface for master data updates
+           --- Conversion of updated data to embeddings
+           --- Re-embedding and updating of old embeddings
+        -- Persistence of dynamic data in database
+        -- Implementation of security and audit for data handling
+   - Human Escalation and Handoff
+        -- Automated escalation triggers
+           --- Low similarity score
+           --- Repeated failed attempts by bot
+           --- User explicitly requests to speak to a person
+        -- Selective polling for human intervention
+        -- Approved template messages for human replies
+        -- Human replies via WhatsApp Business account user interface
+        -- Contextual information provision to humans during escalation
+        -- Dashboard for escalation management
+           --- Tracking of all escalations
+           --- Full view of escalation details
+           --- API-driven replies by dashboard users
+        -- Ticket assignment and management for escalations
+        -- Forwarding of rich media (e.g., images) to escalation channels
+        -- Notifications for human messages
+        -- Chatbot state management during escalation
+           --- Pausing bot responses until human closes escalation
+           --- Ability to handle other concurrent sessions while one is escalated
+        -- Timing-based human assignment and fallback mechanisms
+           --- Assignment to specific humans based on shifts/timings
+           --- Fallback to alternative human contacts
+           --- Tracking module for unresponded escalations (e.g., after 1-2 hours)
+           --- Escalation randomization
+        -- Configurable escalation parameters for new services
+        -- Implementing user blocking/termination for problematic behavior
+           --- Identifying irrelevant repeated queries
+           --- Blocking replies for a defined period (e.g., 24 hours)
+        -- Configurable flagging reasons for user behavior or low similarity scores
+        -- User warnings for exceeding message quotas
+   - Analytics and Reporting
+        -- Dashboard analytics for message topics, frequency, and trends
+        -- Tracking of all user interactions across platforms
+        -- Support and comparison reports
+        -- Recording of email interactions on the dashboard
+        -- Storage and analysis of raw interaction data
+        -- Session management and termination logic
+           --- Defining session completion based on inactivity (e.g., 24 hours or 4-hour intervals)
+           --- Calculation of satisfaction/quality ratings per session
+        -- Tracking of user mobile numbers and session duration for metrics
+

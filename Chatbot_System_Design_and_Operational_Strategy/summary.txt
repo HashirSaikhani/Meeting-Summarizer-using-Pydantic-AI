@@ -1,0 +1,16 @@
+Meeting: Chatbot System Design and Operational Strategy
+=======================================================
+
+The meeting focused on the design and operational strategy for a chatbot system, covering several key areas:
+
+1.  **Data Ingestion and Knowledge Base:** Discussion included issues with WhatsApp API verification and the need for a robust pipeline for new clients. The system will handle diverse document formats (Google Doc, Word, PDF) by transcribing and converting them into a unified format. Excel chat is not directly supported but backend processing will manage data. Emphasis was placed on ingesting structured facts and frequently asked questions (FAQs) initially, with support for various data types like PDF, text, and meeting transcripts. A mechanism to ingest and filter old data for insights was also planned.
+
+2.  **Dynamic Information and Updates:** The system needs to manage dynamic information, such as course rates, which will be fetched through LLMs and updated via a dashboard interface. A review cycle (1-2 weeks configurable) for new facts and knowledge was proposed to ensure accurate ingestion.
+
+3.  **Chatbot Functionality:** The chatbot will handle text, audio messages, and images, with initial focus on static information and dynamic content fetched from a database using function calling mechanisms. Intent determination will guide responses, escalating to human intervention if similarity scores are low or repeated attempts fail.
+
+4.  **Human Escalation and Intervention:** A prototype for intervention recognition was developed, with a flow diagram to manage the process. Escalation involves forwarding complex queries to humans using approved template messages. Humans will interact via the WhatsApp Business account interface or a dedicated dashboard. The system will track escalations, user interactions, and can assign support streams to specific human agents based on timings/shifts. During human escalation, the chatbot will pause responses for that specific thread until the human resolves the query. A dashboard will centralize escalation management, and automated ticket generation with assignments to human agents is planned. The system is designed to be single-tenant but can support multiple services per tenant.
+
+5.  **System Constraints and Handling Diverse Media:** Rate limits will be imposed for various message types (text, audio, image, video) and overall bot interaction to prevent overloading. Video processing will initially involve extracting and treating audio as text. Long audio messages or text exceeding limits will prompt user warnings. Irrelevant content will be automatically replied to, and users sending repeated similar queries or spam may be flagged or temporarily blocked (e.g., 24-hour hold).
+
+6.  **Security, Audit, and Analytics:** Partial implementation of security and audit features is underway. The dashboard will display new messages, manage rule handling, and track rate limits. Analytics will provide insights into topics, frequency, matches, trends, message relevance, and new questions. The system will also track user interactions, calculate success rates, and define session termination criteria. A high-level flow diagram is to be created for clarity.

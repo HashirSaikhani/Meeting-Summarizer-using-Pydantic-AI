@@ -1,0 +1,6 @@
+Main Feature: Client and Service Provisioning
+Feature Block:
+   --- Multiple Knowledge Bases per Unique Deployment
+==================================================================
+
+The system we are building is single-tenant, not multi-tenant. They may have two or three tenants, two or three different services; each tenant has one master. Multi-tenancy: multiple knowledge bases exist but a unique deployment.

@@ -1,0 +1,6 @@
+Main Feature: Client and Service Provisioning
+Feature Block:
+   - Client Onboarding Pipeline
+==============================================
+
+first when a new client comes, make whole pipeline in such way, what steps will be, use case pipeline in such way, how we will deploy them, their knowledge base in which format can be, initially knowledge base how to ingest, sub-section updates will be, in all cases check, they give packed bands,

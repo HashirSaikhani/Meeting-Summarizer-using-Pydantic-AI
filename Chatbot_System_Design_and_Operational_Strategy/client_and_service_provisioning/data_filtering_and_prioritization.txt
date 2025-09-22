@@ -1,0 +1,9 @@
+Main Feature: Client and Service Provisioning
+Feature Block:
+  - Data filtering and prioritization
+    -- Decide which images/videos to process or ignore
+    -- Totally ignore videos initially (but view them)
+    -- Discard unnecessary data (e.g., won't process 3D)
+=====================================================
+
+Initially we will totally ignore videos, yes, we will discard that. Initially, we are not going to consider 3D. Yes, our system will not support it, so we will discard that data.

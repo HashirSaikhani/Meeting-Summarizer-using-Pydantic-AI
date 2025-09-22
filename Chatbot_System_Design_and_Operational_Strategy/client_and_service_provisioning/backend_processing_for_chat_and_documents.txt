@@ -1,0 +1,7 @@
+Main Feature: Client and Service Provisioning
+Feature Block:
+   --- Backend Processing for Chat and Documents
+=============================================================
+
+so our backend will do all the work, chat will be like some parsed, and documents will be seen,
+We say that Excel, all this is not necessary that we integrate as-is and implement, therefore support we will put in backend,

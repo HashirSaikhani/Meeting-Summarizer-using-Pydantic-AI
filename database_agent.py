@@ -31,12 +31,6 @@ class MeetingName(BaseModel):
 provider = GoogleProvider(api_key=os.getenv("GOOGLE_API_KEY"))
 model = GoogleModel("gemini-2.5-flash", provider=provider)
 
-# Database agent
-agent = Agent(
-    model,
-    system_prompt="You are a database agent. Your job is to save and update transcripts.",
-)
-
 # Naming tool agent
 naming_tool_agent = Agent(
     model,
@@ -53,7 +47,6 @@ naming_tool_agent = Agent(
 # -------------------------------
 # Save Transcript + Generate Name
 # -------------------------------
-@agent.tool
 async def save_transcript(ctx: RunContext[None], file_path: str) -> str:
     """
     Reads a transcript file, saves it into database.json,

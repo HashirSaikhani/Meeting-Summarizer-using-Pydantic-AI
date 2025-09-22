@@ -1,0 +1,6 @@
+Main Feature: Client and Service Provisioning
+Feature Block:
+   --- Server-Side Information Registration
+========================================================
+
+Another thing, which information we have registered in the FAX, which is also server-side, we need to make protocol for them that they review their respective information individually.

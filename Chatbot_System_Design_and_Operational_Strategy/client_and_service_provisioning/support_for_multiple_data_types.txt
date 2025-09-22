@@ -1,0 +1,17 @@
+Main Feature: Client and Service Provisioning
+Feature Block:
+  - Support for multiple data types
+    -- Text messages
+    -- Audio messages
+    -- Images
+    -- Videos
+===================================================
+
+one is text message, one is audio message, images, some last, there requirement was that when user pressed high, we message, that this pressed route, then with images, etc., designed posters, we can say yes, we posted it, brochures
+For example, if image comes like a payment. They did payment, we said it’s retail work. They sent image confirming payment. Now, human access is not visible; someone has to verify. Then we need to tell them it is ok, received. Amount received, confirmed. If a question arises, human must consider it.
+Now the chatbot gets an image: “I have made payment.” Ok. I cannot verify myself because I don’t have account access.
+Another way is that we can forward the information, like images we received, forward them to that channel, and indicate that this message came from that number, so they can search it, and the information will be applied from WhatsApp itself.
+Audio, yes, we need to handle; minutes should be considered.
+Audio: I mean the data coming, we need to have our mechanism for the received data, what action to take.
+some things will occur that cannot be forwarded with images or such.
+If an image comes, we view it and escalate if needed.

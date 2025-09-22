@@ -1,0 +1,23 @@
+Main Feature: System Monitoring and Control
+============================================
+
+Another thought: should we have a separate dashboard for escalations? To know how many escalations happened. In one day, attended users.
+Full view of escalations from dashboard.
+API should know the context: if already replied, small poll in chat session tracks who replied.
+The dashboard user is replying via API.
+We can monitor, test, and manage the processes via dashboards independently.
+Testing is ongoing; the system is designed to handle these assignments efficiently, keeping track of users, sessions, and escalations without conflicts, while ensuring clarity in service handling and response.
+Dashboard: new messages come in, and the system handles them according to defined rules, ensuring rate limits, message type constraints, and processing priorities are maintained for text, audio, images, and video.
+Multiple reasons for flagging are distinct and recognizable from the dashboard.
+The flag list should be dynamic and configurable from the front end. Front-end users can add reasons, and the system supports configurable rules.
+On the dashboard, before identifying new messages, if the similarity score is low, messages may bypass filters, but when retrieved, highly relevant messages based on similarity scores can be automatically marked as new information. If verified by a human, these facts are confirmed as new.
+New information will appear on the dashboard, and automation can be enabled later once confidence levels are satisfactory.
+Regarding the dashboard analytics: it should display topics, frequency, matches, and trends in messages and interactions, providing insights on message relevance, new questions, and similarity patterns.
+We will also include this in the matching process for support bars, escalation, verification in the dashboard, backup, and release tracking. We need to monitor this carefully.
+The flow is as follows: it includes module flow, dashboard checklists, and monitoring support activities.
+For the website, we need to track all user interactions, and in the dashboard, we should be able to view them together.
+There is an option for support and comparison reports.
+If an email is sent, the information will still be recorded and reflected on the dashboard for insights.
+For example, if a user asks a question and receives a successful answer, we can analyze it at the end of the day to calculate a success rate.
+We also determine session termination: if we reply and the user does not respond within 24 hours, or after four hours intervals, the session is considered complete. We calculate satisfaction or quality rating per session.
+We also track the user’s mobile number for the data, including the duration and all related information. This helps in generating metrics and statistics.

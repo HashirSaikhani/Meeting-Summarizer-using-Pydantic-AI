@@ -1,0 +1,7 @@
+Main Feature: Client and Service Provisioning
+Feature Block:
+   --- Static and Dynamic Knowledge Base Distinction
+=================================================================
+
+Initially our static information will remain, dynamic information which we expect, say, 25 or 40 cases expected, which will be dynamic content, then from DB fetch, ok, and function calling mechanism, tools, those are tools, ok, ok, ok, one or two things done, ingestion full discussion done, just one thought, any ambiguity remains, ok, ok, now whatever on testing per client, whatever prompt comes, it determines intent, some goes to right owner, some I respond from my knowledge, to say hello, its inner logic is inner tool, ok, obviously it is hello response, for your new helpers etc., where knowledge base Q&A comes, if similarity score very low, then it escalates to human, and if repeated attempt fails, it escalates to human, the intent is taken that it has been understood, we have metric timing, yes, we are not satisfied, if escalates to human, now...
+It will have a knowledge base, static and dynamic. When you check it, you can see the full data, review it, configure the dynamic knowledge base’s variety. By default, assume one entity, but it can be configured.

@@ -1,0 +1,14 @@
+Main Feature: Client and Service Provisioning
+Feature Block:
+  - System limits and rate limiting
+    -- User-based rate limits (e.g., per hour, per minute)
+    -- Rate limits per message type (text, audio, image, video)
+    -- Configurable system limits for data length/size (e.g., audio length, text length, number of image files)
+    -- Configurable page limits for documents (e.g., 1000 pages, 300 pages, 200 pages)
+    -- Rate limits per bot interaction (e.g., 60 per hour)
+    -- Impose limits on audio processing (e.g., discard if too long)
+===================================================
+
+We also say eight hours, eight hours. It’s a single number, number one. I say, “Who are the humans? How many humans are there?” We have to assign a fallback number in the service packaging. If anyone is available in a shift, they will handle it. There are two shifts, 16 hours; it will escalate, and we will make it required. The backup: whenever we create a service, in DevOps terms, it’s called a “service” or “work unit.” Whenever we create a new service, it will respond on these interfaces. It will have an escalator, some parameters, a registered escalator, a fake escalator register, a full flow system. If a new client wants a new service, we spawn a new service. It will respond to that number; it will follow up. It will have a knowledge base, static and dynamic. When you check it, you can see the full data, review it, configure the dynamic knowledge base’s variety. By default, assume one entity, but it can be configured.
+The system we are building is single-tenant, not multi-tenant. They may have two or three tenants, two or three different services; each tenant has one master. Multi-tenancy: multiple knowledge bases exist but a unique deployment. Escalation and related processes follow a fixed guideline; the user understands. Even if it’s single-tenant, we have to consider maximum services per tenant. That’s business: we set limits and charge accordingly. The service may have limits: maximum instances it can serve, each with a master service, a second service, a third, etc. They can adjust or scale it; our cause grows with that. For now, we can set constraints based on members. We decide how many integrations can be done, who can handle which instances. The system will transparently manage escalations, constraints, and service assignments.
+Even internally, the system ensures transparency, independent operation, and escalator tracking. We can monitor, test, and manage the processes via dashboards independently. Testing is ongoing; the system is designed to handle these assignments efficiently, keeping track of users, sessions, and escalations without conflicts, while ensuring clarity in service handling and response.

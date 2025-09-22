@@ -1,0 +1,6 @@
+Main Feature: Client and Service Provisioning
+Feature Block:
+   --- Database Persistence for Training Data
+==========================================================
+
+also in training form how we do in DB, for persistence attach in memory, further max types, discuss,
